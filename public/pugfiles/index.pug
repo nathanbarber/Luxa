@@ -5,5 +5,14 @@ html
         link(href="reusables.css", rel="stylesheet")
         link(href="partials/footer.css", rel="stylesheet")
         link(href="partials/navbar.css", rel="stylesheet")
+        script(src="https://opensource.keycdn.com/angularjs/1.6.2/angular.min.js")
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js")
+        script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+        script(src="app.js")
     body
-        
+        div.app(ng-app="luxa")
+            div(ng-controller="nav").nav
+                div.title L u x a
+                div.tasks
+                    div(ng-repeat="x in tasks").micro {{x}}
+            div(ng-view).content

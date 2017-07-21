@@ -13,7 +13,7 @@ var express = require("express"),
             var htmlFilePath = pugFilePath
                 .replace(".pug", ".html")
                 .replace('/pugfiles', '');
-            var compile = pug.compileFile(pugFilePath);
+            var compile = pug.compileFile(pugFilePath, {pretty: '   '});
             fs.writeFileSync(htmlFilePath, compile());
         }
     }

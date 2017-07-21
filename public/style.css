@@ -1,8 +1,19 @@
 html {
-    
+    color: #323232;
+    font-family: Avenir, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 body {
     margin: 0;
     overflow: hidden;
+    text-align: center;
+}
+
+.content {
+    width: 72vw;
+    margin-top: 90px;
+    overflow-x: hidden;
+    text-align: center;
+    margin-left: 14vw;
+    position: relative;
 }
