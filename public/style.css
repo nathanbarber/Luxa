@@ -5,7 +5,8 @@ html {
 
 body {
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     text-align: center;
 }
 

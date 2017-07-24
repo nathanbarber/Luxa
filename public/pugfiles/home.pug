@@ -1,2 +1,6 @@
-div.section#home
+div.section#home(ng-controller="home")
+    link(href="partials/home.css", rel="stylesheet")
     p this is home
+    div.feedblock(ng-repeat="x in dummyData")
+        div.head {{x.head}}
+        div.body {{x.body}}

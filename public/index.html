@@ -16,7 +16,7 @@
          <div class="nav" ng-controller="nav">
             <div class="title">L u x a</div>
             <div class="tasks">
-               <div class="micro" ng-repeat="x in tasks">{{x}}</div>
+               <div class="micro" ng-repeat="x in tasks" ng-mousedown="to(x.toLowerCase())">{{x}}</div>
             </div>
          </div>
          <div class="content" ng-view="ng-view"></div>

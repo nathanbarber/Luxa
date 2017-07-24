@@ -14,5 +14,5 @@ html
             div(ng-controller="nav").nav
                 div.title L u x a
                 div.tasks
-                    div(ng-repeat="x in tasks").micro {{x}}
+                    div(ng-repeat="x in tasks" ng-mousedown="to(x.toLowerCase())").micro {{x}}
             div(ng-view).content

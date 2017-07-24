@@ -1,0 +1,13 @@
+div.section#profile(ng-controller="profile")
+    link(href="partials/profile.css", rel="stylesheet")
+    div.user
+        div.userhead
+            div.img
+            h1.name
+        div.userbody
+            div.description
+            div.status
+        div.userstore
+            //div.item(ng-repeat="x in store-items")
+                img.img(ng-src="x.img")
+                div.name {{x.name}}

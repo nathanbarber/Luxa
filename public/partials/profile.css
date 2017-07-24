@@ -1,0 +1,57 @@
+#profile {
+    margin-top: 100px;
+}
+
+.user {
+    display: none;
+}
+
+.user .userhead {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    text-align: left;
+    overflow: hidden;
+    display: table;
+}
+
+.user .userhead .img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: center no-repeat cover;
+    display: table-cell;
+    background-color: #9d9d9d;
+}
+
+.user .userhead .name {
+    font-size: 40px;
+    color: #323232;
+    padding-left: 80px;
+    display: table-cell;
+    font-weight: 200;
+    vertical-align: middle;
+}
+
+.userbody {
+    margin-top: 50px;
+    text-align: left;
+}
+
+.userbody .description {
+    font-size: 26px;
+}
+
+.userbody .status {
+    color: #434343;
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.userstore {
+    width: 100%;
+    margin-top: 100px;
+    height: 140px;
+    border-radius: 10px;
+    background-color: #dedede;
+}
