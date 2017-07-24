@@ -30,3 +30,4 @@ app.use(express.static(__dirname + "/public"));
 app.listen(8083, function() {
     console.log("listening on 8083");
 });
+requests.database("select * from users");

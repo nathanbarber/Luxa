@@ -1,0 +1,10 @@
+.fadeaway {
+    opacity: 0;
+    -webkit-transition: opacity 0.3s ease-out 0s;
+    -moz-transition: opacity 0.3s ease-out 0s;
+    transition: opacity 0.3s ease-out 0s;
+}
+
+.m-center {
+    margin-left: auto; margin-right: auto;
+}

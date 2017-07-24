@@ -74,14 +74,27 @@ app.controller('profile', function($scope) {
             $('.userstore .name').append($scope.dummyuser.storeItems[i][0]);
             console.log(i);
         }*/
-        $('.user').css('display', 'initial');
     };
-    (function() {
-        if($scope.user == undefined) {
-            //Request login, but for now dummydata
-            $scope.user = $scope.dummyuser;
-            //Callback for real server/login usage later
-            $scope.renderUserProfile();
+    $scope.login = function() {
+        var loginSuccess;
+        if(true) {
+            loginSuccess = true;
+        } else {
+            loginSuccess = false;
         }
-    })();
+        if(loginSuccess) {
+            $('.login').animate({
+                opacity: 0
+            }, 300);
+            //Set user to dummy user for testing
+            setTimeout(function() {
+                $scope.user = $scope.dummyuser;
+                $scope.renderUserProfile();
+                $('.login').css('display', 'none');
+                $('.user').animate({
+                    opacity: 1
+                }, 300);
+            }, 300);
+        }
+    };
 });
