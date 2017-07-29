@@ -1,0 +1,11 @@
+div.section#signup(ng-controller="signup")
+    link(href="partials/signup.css", rel="stylesheet")
+    div.signupform
+        form
+            input.name(placeholder="Full Name")
+            input.username(placeholder="Username")
+            input.password(type="password" placeholder="Password")
+            input.verifypassword(type="password" placeholder="Verify Password")
+            div.button-style-one Submit
+        div.uploadPicture
+            input.profilePic(type="file")

@@ -66,6 +66,13 @@
     transition: background-color 0.3s, color 0.3s ease-in 0s;
 }
 
+.signup {
+    text-decoration: none;
+    color: #9f9f9f;
+    font-size: 20px;
+    cursor: pointer;
+}
+
 .user {
     opacity: 0;
 }

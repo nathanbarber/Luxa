@@ -14,6 +14,10 @@ app.config(function($routeProvider) {
     })
     .when('/cart', {
         templateUrl: 'wip.html'
+    })
+    .when('/signup', {
+        templateUrl: 'signup.html',
+        controller: 'signup'
     });
 });
 
@@ -45,7 +49,7 @@ app.controller("home", function($scope) {
     ];
 });
 
-app.controller('profile', function($scope) {
+app.controller('profile', function($scope, $location) {
     $scope.user = undefined;
     $scope.defaultImg = (function() {
         var img = new Image();
@@ -97,4 +101,11 @@ app.controller('profile', function($scope) {
             }, 300);
         }
     };
+    $scope.signUp = function() {
+        $location.path("signup");
+    };
+});
+
+app.controller('signup', function($scope) {
+
 });

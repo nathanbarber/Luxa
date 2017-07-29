@@ -1,0 +1,48 @@
+.signupform {
+    background-color: #878787;
+    border-radius: 10px;
+    margin-top: 60px;
+    padding: 30px;
+    text-align: left;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.signupform form {
+    display: table-cell;
+    background-color: red;
+}
+
+.signupform input:not(.profilePic) {
+    font-size: 20px;
+    background-color: #afafaf;
+    color: #323232;
+    border-radius: 10px;
+    padding: 10px;
+    display: block;
+    border: none;
+    outline-style: none;
+    margin-top: 30px;
+}
+
+.signupform button {
+    border: none;
+    outline-style: none;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+.signupform .uploadPicture {
+    display: table-cell;
+    margin-left: 30px;
+    vertical-align: middle;
+    background-color: red;
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.uploadPicture input {
+    margin-left: 200px;
+}

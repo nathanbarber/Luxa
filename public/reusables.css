@@ -8,3 +8,27 @@
 .m-center {
     margin-left: auto; margin-right: auto;
 }
+
+.button-style-one {
+    margin-top: 20px;
+    color: #9f9f9f;
+    background-color: transparent;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    border: 3px #9f9f9f solid;
+    outline: none;
+    -webkit-transition: background-color 0.3s, color 0.3s ease-in 0s;
+    -moz-transition: background-color 0.3s, color 0.3s ease-in 0s;
+    transition: background-color 0.3s, color 0.3s ease-in 0s;
+}
+
+.button-style-one:hover {
+    color: #323232;
+    background-color: #9f9f9f;
+    -webkit-transition: background-color 0.3s, color 0.3s ease-in 0s;
+    -moz-transition: background-color 0.3s, color 0.3s ease-in 0s;
+    transition: background-color 0.3s, color 0.3s ease-in 0s;
+}
