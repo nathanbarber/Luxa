@@ -107,5 +107,22 @@ app.controller('profile', function($scope, $location) {
 });
 
 app.controller('signup', function($scope) {
-
+    (function() {
+        function readURL(input) {
+            console.log("reading");
+            if(input.files && input.files[0]) {
+                console.log('exists');
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.fill').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                console.log("read failed");
+            }
+        }
+        $('input:file').change(function() {
+            readURL(this);
+        });
+    })();
 });

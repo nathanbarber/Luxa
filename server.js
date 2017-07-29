@@ -5,6 +5,7 @@ var express = require("express"),
     pug = require("pug"),
     fs = require("fs");
 
+//BUILD
 (function() {
     var all = fs.readdirSync(__dirname + "/public/pugfiles/");
     for(var i in all) {
