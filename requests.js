@@ -11,7 +11,7 @@ module.exports = {
             return response;
         });
     },
-    database: function(querystring) {
+    database: function(querystring, callback) {
         var connection = mysql.createConnection({
             host: "localhost",
             user: 'nodeAuth',
@@ -22,7 +22,7 @@ module.exports = {
             if(err) {
                 console.log(err);
             }
-            console.log(res);
+            callback(res);
             connection.end();
         });
     },

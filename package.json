@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/nathanbarber/Luxa#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "multer": "^1.3.0",
     "serve-favicon": "^2.4.3"
   }
 }

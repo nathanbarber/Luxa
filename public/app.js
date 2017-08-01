@@ -106,8 +106,8 @@ app.controller('profile', function($scope, $location) {
     };
 });
 
-app.controller('signup', function($scope) {
-    (function() {
+app.controller('signup', function($scope, $http) {
+    (function responsiveImageInput() {
         function readURL(input) {
             console.log("reading");
             if(input.files && input.files[0]) {
@@ -115,6 +115,7 @@ app.controller('signup', function($scope) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     $('.fill').attr('src', e.target.result);
+                    $userImage = e.target.result;
                 };
                 reader.readAsDataURL(input.files[0]);
             } else {
@@ -125,4 +126,34 @@ app.controller('signup', function($scope) {
             readURL(this);
         });
     })();
+
+    $scope.submitNewUser = function() {
+        var data = new FormData();
+        var image = $('.profilePic')[0].files[0];
+        var userTokens = {
+            name: $('.name').val(),
+            username: $('.username').val(),
+            password: $('.password').val(),
+        };
+        for(var i in userTokens) {
+            data.append(i, userTokens[i]);
+        }
+        data.append("pic", image);
+
+        console.log(data);
+        for(var pair of data.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]);
+        }
+
+        $.ajax({
+            url: '/submitNewUser',
+            data: data,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function(data){
+                alert(data);
+            }
+        });
+    };
 });
