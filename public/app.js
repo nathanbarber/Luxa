@@ -141,7 +141,7 @@ app.controller('signup', function($scope, $http, $location) {
         var usval = $('.username').value;
         var specials=/^[\w&.-]+$/;
         console.log(specials.test(usval));
-    }
+    };
     $scope.submitNewUser = function() {
         var ajaxConditional = false;
         var advisoryMessage;
@@ -177,12 +177,12 @@ app.controller('signup', function($scope, $http, $location) {
         }
         if(ajaxConditional) {
             $('.name').val($('.name').val().replace('_', ' '));
-            /*var data = new FormData();
+            var data = new FormData();
             var image = $('.profilePic')[0].files[0];
             var userTokens = {
-                fullName: $('.name').value,
-                username: $('.username').value.toLowerCase(),
-                password: $('.password').value,
+                fullName: $('.name').val(),
+                username: $('.username').val().toLowerCase(),
+                password: $('.password').val(),
             };
             for(var i in userTokens) {
                 data.append(i, userTokens[i]);
@@ -202,7 +202,7 @@ app.controller('signup', function($scope, $http, $location) {
                     });
                     $location.path('profile');
                 }
-            });*/
+            });
             console.log('works');
         } else {
             console.log(advisoryMessage);
