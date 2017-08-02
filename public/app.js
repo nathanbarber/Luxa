@@ -109,9 +109,7 @@ app.controller('profile', function($scope, $location) {
 app.controller('signup', function($scope, $http) {
     (function responsiveImageInput() {
         function readURL(input) {
-            console.log("reading");
             if(input.files && input.files[0]) {
-                console.log('exists');
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     $('.fill').attr('src', e.target.result);
@@ -131,7 +129,7 @@ app.controller('signup', function($scope, $http) {
         var data = new FormData();
         var image = $('.profilePic')[0].files[0];
         var userTokens = {
-            name: $('.name').val(),
+            fullName: $('.name').val(),
             username: $('.username').val(),
             password: $('.password').val(),
         };
@@ -139,11 +137,6 @@ app.controller('signup', function($scope, $http) {
             data.append(i, userTokens[i]);
         }
         data.append("pic", image);
-
-        console.log(data);
-        for(var pair of data.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]);
-        }
 
         $.ajax({
             url: '/submitNewUser',

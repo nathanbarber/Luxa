@@ -22,19 +22,18 @@ module.exports = {
             if(err) {
                 console.log(err);
             }
-            callback(res);
+            if(callback) {
+                callback(res);
+            }
             connection.end();
         });
     },
-    insertUser: function(user, password, userID, bufferedImage) {
-        if(bufferedImage == undefined) {
-            bufferedImage = "none";
-        }
-        var insertString = "insert into users values('"  + 
+    insertUser: function(user, password, userID, fullName) {
+        var insertString = "insert into users(username, password, userID, fullName) values('"  + 
             user + "', '" + 
             password + "', '" + 
             userID + "', '" + 
-            bufferedImage + "')";
+            fullName + "')";
         module.exports.database(
             insertString
         );
