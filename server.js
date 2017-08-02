@@ -57,12 +57,6 @@ app.post('/submitNewUser', upload.any(), function(req, res) {
                 baseUserDir + userID + "/profile." + mime.extension(req.files[0].mimetype)
             );
         });
-        /*var query = "insert into users(username, password, userID, fullName) values ('" + 
-            req.body.username + "', '" + 
-            req.body.password + "', '" + 
-            userID + "', '" + 
-            req.body.fullName + "')";
-        requests.database(query);*/
         requests.insertUser(req.body.username, req.body.password, userID, req.body.fullName);
     });
     console.log("new user created");

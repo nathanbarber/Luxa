@@ -138,15 +138,17 @@ app.controller('signup', function($scope, $http) {
         }
         data.append("pic", image);
 
-        $.ajax({
-            url: '/submitNewUser',
-            data: data,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: function(data){
-                alert(data);
-            }
-        });
+        if($('.username').val() != "test" && $('.name').val() != test) {
+            $.ajax({
+                url: '/submitNewUser',
+                data: data,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function(data){
+                    alert(data);
+                }
+            });
+        }
     };
 });
