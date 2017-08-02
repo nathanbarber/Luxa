@@ -2,15 +2,15 @@ div.section#signup(ng-controller="signup")
     link(href="partials/signup.css", rel="stylesheet")
     div.signupform.m-center
         form
-            input.name(placeholder="Full Name")
-            input.username(placeholder="Username")
-            input.password(type="password" placeholder="Password")
-            input.verifypassword(type="password" placeholder="Verify Password")
+            input.text.name(spellcheck="false" placeholder="Full Name")
+            input.text.username(spellcheck="false" placeholder="Username")
+            input.text.password(spellcheck="false" type="password" placeholder="Password")
+            input.text.verifypassword(spellcheck="false" type="password" placeholder="Verify Password")
             div.picWrapper.m-center
-                img.fill
+                div.fill
                 input.profilePic(
                     type="file" name="file" id="file" accept="image/x-png, image/jpeg, image/gif"
                 )
                 div.labelWrapper
-                    label(for="file") Select Profile Image
+                    label(for="file" ng-mouseenter="fadeUI()" ng-mouseleave="unFadeUI()") Select Profile Image
             button.button-style-one(ng-mousedown="submitNewUser()") Submit

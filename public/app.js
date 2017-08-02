@@ -106,13 +106,16 @@ app.controller('profile', function($scope, $location) {
     };
 });
 
-app.controller('signup', function($scope, $http) {
+app.controller('signup', function($scope, $http, $location) {
     (function responsiveImageInput() {
         function readURL(input) {
             if(input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('.fill').attr('src', e.target.result);
+                    $('.fill').css({
+                        background: "url('" + e.target.result + "') no-repeat center",
+                        backgroundSize: 'cover'
+                    });
                     $userImage = e.target.result;
                 };
                 reader.readAsDataURL(input.files[0]);
@@ -124,21 +127,67 @@ app.controller('signup', function($scope, $http) {
             readURL(this);
         });
     })();
-
+    $scope.fadeUI = function() {
+        $('.fill').animate({
+            opacity: 0.7
+        }, 150);
+    };
+    $scope.unFadeUI = function() {
+        $('.fill').animate({
+            opacity: 1
+        }, 150);
+    };
+    $scope.testRegex = function() {
+        var usval = $('.username').value;
+        var specials=/^[\w&.-]+$/;
+        console.log(specials.test(usval));
+    }
     $scope.submitNewUser = function() {
-        var data = new FormData();
-        var image = $('.profilePic')[0].files[0];
-        var userTokens = {
-            fullName: $('.name').val(),
-            username: $('.username').val(),
-            password: $('.password').val(),
-        };
-        for(var i in userTokens) {
-            data.append(i, userTokens[i]);
+        var ajaxConditional = false;
+        var advisoryMessage;
+        var inputArray = $('.text').toArray();
+        $('.name').val($('.name').val().replace(' ', '_'));
+        for(var j in inputArray) {
+            if(inputArray[j].value != '') {
+                advisoryMessage = "You must fill all fields!";
+                if(isNaN(inputArray[j].value) && inputArray[j].value.length > 3) {
+                    advisoryMessage = "All fields must have a minimum length of 4.";
+                    if(!(isNaN(inputArray[j].value))) {
+                        advisoryMessage = "Please use letters and numbers.";
+                    }
+                    if(!(inputArray[j].value.includes("'"))) {
+                        advisoryMessage = "Please remove special characters.";
+                        if(inputArray[j].value != "test") {
+                            var specials=/^[\w&.-_]+$/;
+                            if(specials.test(inputArray[j].value)) {
+                                if($('.password').val() == $('.verifypassword').val()) {
+                                    ajaxConditional = true;
+                                    advisoryMessage = '';
+                                } else {
+                                    advisoryMessage = "Passwords don\'t match!";
+                                } 
+                            } else {
+                                advisoryMessage = "Please remove special characters.";
+                                break;
+                            }
+                        } else {break;}
+                    } else {break;}
+                } else {break;}
+            } else {break;}
         }
-        data.append("pic", image);
-
-        if($('.username').val() != "test" && $('.name').val() != test) {
+        if(ajaxConditional) {
+            $('.name').val($('.name').val().replace('_', ' '));
+            /*var data = new FormData();
+            var image = $('.profilePic')[0].files[0];
+            var userTokens = {
+                fullName: $('.name').value,
+                username: $('.username').value.toLowerCase(),
+                password: $('.password').value,
+            };
+            for(var i in userTokens) {
+                data.append(i, userTokens[i]);
+            }
+            data.append("pic", image);
             $.ajax({
                 url: '/submitNewUser',
                 data: data,
@@ -146,9 +195,28 @@ app.controller('signup', function($scope, $http) {
                 contentType: false,
                 type: 'POST',
                 success: function(data){
-                    alert(data);
+                    $('form')[0].reset();
+                    $('.fill').css({
+                        background: "initial",
+                        backgroundColor: "transparent"
+                    });
+                    $location.path('profile');
                 }
-            });
+            });*/
+            console.log('works');
+        } else {
+            console.log(advisoryMessage);
+            advisoryMessage = '';
         }
     };
 });
+
+// OUTER UI FUNCTIONS
+
+function showLoadPanel() {
+
+}
+
+function hideLoadPanel() {
+
+}
