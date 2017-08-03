@@ -1,10 +1,4 @@
-div.section#profile(ng-controller="profile")
-    div.login
-        div.box.m-center
-            input.username.m-center(type="text" placeholder="username")
-            input.password.username.m-center(type="password" placeholder="password")
-            button.submit.m-center(ng-mousedown="login()") Submit
-            h3.signup.m-center(ng-mousedown="signUp()") Dont have an account?
+div.section#profile(renderUserProfile ng-controller="profile")
     div.user
         div.userhead
             div.img

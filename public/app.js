@@ -19,7 +19,17 @@ app.config(function($routeProvider, $qProvider) {
     .when('/signup', {
         templateUrl: 'signup.html',
         controller: 'signup'
+    })
+    .when('/login', {
+        templateUrl: 'login.html',
+        controller: 'login'
     });
+});
+
+app.run(function($rootScope, $location) {
+    if(!successfulLogin) {
+        $location.path("/login");
+    } 
 });
 
 app.controller("nav", function($scope, $location) {
@@ -50,19 +60,16 @@ app.controller("home", function($scope) {
     ];
 });
 
-app.controller('profile', function($scope, $location, $http) {
-    (function() {
-        if(u$er.id) {
-            renderProfile();
+app.controller('login', function($scope, $location, $http) {
+    $scope.$on('$locationChangeStart', function(event) {
+        if(!successfulLogin) {
+            $location.path("/login");
+            console.log("user block is still undefined");
         } else {
-            $('.login').css({
-                display: 'table'
-            });
+            console.log("user block is now defined");
         }
-    })();
-    $scope.renderUserProfile = function() {
-        renderProfile();
-    };
+    });
+    $scope.renderUserProfileControl = {};
     $scope.login = function() {
         var keys = {
             username: $('.username').val(),
@@ -98,7 +105,9 @@ app.controller('profile', function($scope, $location, $http) {
                     $('.login').animate({
                         opacity: 0
                     }, 300, function() {
-                        $scope.renderUserProfile();
+                        successfulLogin = true;
+                        $location.path("/profile");
+                        $scope.$apply();
                     });
                 }, function(err) {
                     console.log("IMGERR __ COULD NOT GET IMAGE");
@@ -111,6 +120,32 @@ app.controller('profile', function($scope, $location, $http) {
     $scope.signUp = function() {
         $location.path("signup");
     };
+    //AUTOEXE
+    (function() {
+        if(u$er.name != undefined) {
+            $scope.renderUserProfile();
+        } else {
+            $('.login').css({
+                display: 'table'
+            });
+        }
+    })();
+});
+
+app.controller('profile', function($scope, $location, $http) {
+    $scope.renderProfile = function() {
+        $('.userhead .name').text(u$er.name);
+        $('.userhead .img').css({
+            background: "url('data:image/png;base64," + u$er.profile + "') center no-repeat",
+            backgroundSize: "cover" 
+        });
+        $('.userbody .description').text(u$er.bio);
+        $('.userbody .status').text(u$er.status.toUpperCase());
+        $('.user').animate({
+            opacity: 1
+        }, 300);
+    };
+    $scope.renderProfile();
 });
 
 app.controller('signup', function($scope, $http, $location) {
@@ -217,6 +252,16 @@ app.controller('signup', function($scope, $http, $location) {
     };
 });
 
+// DIRECTIVES
+
+app.directive("renderUserProfile", function() {
+    return {
+        controller: function($scope) {
+            
+        }
+    };
+});
+
 // OUTER UI FUNCTIONS AND DATA
 
 u$er = {
@@ -228,19 +273,7 @@ u$er = {
     storeItems: []
 };
 
-function renderProfile() {
-    $('.userhead .name').text(u$er.name);
-    $('.userhead .img').css({
-        background: "url('data:image/png;base64," + u$er.profile + "') center no-repeat",
-        backgroundSize: "cover" 
-    });
-    $('.userbody .description').text(u$er.bio);
-    $('.userbody .status').text(u$er.status.toUpperCase());
-    $('.login').css('display', 'none');
-    $('.user').animate({
-        opacity: 1
-    }, 300);
-}
+successfulLogin = false;
 
 function showLoadPanel() {
 
