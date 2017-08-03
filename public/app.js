@@ -1,5 +1,6 @@
 var app = angular.module("luxa", ["ngRoute"]);
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
     $routeProvider
     .when('/', {
         templateUrl: 'home.html',
@@ -49,56 +50,74 @@ app.controller("home", function($scope) {
     ];
 });
 
-app.controller('profile', function($scope, $location) {
-    $scope.user = undefined;
-    $scope.defaultImg = (function() {
-        var img = new Image();
-        img.src = "img/cookie.gif";
-        img.className = 'img';
-        return img;
-    })();
-    $scope.dummyuser = {
-        name: "Nathan Barber",
-        profile: new Image(),
-        description: "I like making raspberry pi",
-        status: 'seller',
-        storeItems: [
-            ['raspberry pi', $scope.defaultImg],
-            ['blueberry pi', $scope.defaultImg]
-        ]
+app.controller('profile', function($scope, $location, $http) {
+    $scope.user = {
+        name: undefined,
+        id: undefined,
+        profile: undefined,
+        bio: undefined,
+        status: undefined,
+        storeItems: []
     };
     $scope.renderUserProfile = function() {
         $('.userhead .name').text($scope.user.name);
-        $('.userhead .img').css('background-image', 'img/cookie.gif');
+        /*$('.userhead .img').css({
+            background: "url('" +  + "') center no-repeat",
+            backgroundSize: "cover" 
+        });*/
         $('.userbody .description').text($scope.user.description);
         $('.userbody .status').text($scope.user.status.toUpperCase());
-        /*for(var i = 0; i < $scope.dummyuser.storeItems.length; i++) {
-            $('.userstore').append("<div class='item'></div>");
-            $('.userstore .item').append($scope.dummyuser.storeItems[i][1]);
-            $('.userstore .name').append($scope.dummyuser.storeItems[i][0]);
-            console.log(i);
-        }*/
     };
     $scope.login = function() {
-        var loginSuccess;
-        if(true) {
-            loginSuccess = true;
-        } else {
-            loginSuccess = false;
-        }
-        if(loginSuccess) {
-            $('.login').animate({
-                opacity: 0
-            }, 300);
-            //Set user to dummy user for testing
-            setTimeout(function() {
-                $scope.user = $scope.dummyuser;
-                $scope.renderUserProfile();
-                $('.login').css('display', 'none');
-                $('.user').animate({
-                    opacity: 1
-                }, 300);
-            }, 300);
+        var keys = {
+            username: $('.username').val(),
+            password: $('.password').val()
+        };
+        $http({
+            url: '/login',
+            params: keys,
+            method: "GET",
+        })
+        .then(function(data) {
+            callback(data);
+        },
+        function() {
+            console.log("error");
+        });
+        function callback(res) {
+            var data = res.data;
+            console.log(data);
+            if(data.success == true) {
+                console.log("data succeeded");
+                $scope.user.name = data.name;
+                $scope.user.id = data.userID;
+                $scope.user.description = data.userBio;
+                $scope.user.status = data.status;
+                $http({
+                    method: "GET",
+                    url: '/p-getimg',
+                    params: {
+                        userID: $scope.user.id
+                    }
+                })
+                .then(function(imgres) {
+                    console.log(imgres);
+                    $scope.user.profile = imgres;
+                    $('.login').animate({
+                        opacity: 0
+                    }, 300, function() {
+                        $scope.renderUserProfile();
+                        $('.login').css('display', 'none');
+                        $('.user').animate({
+                            opacity: 1
+                        }, 300);
+                    });
+                }, function(err) {
+                    console.log(err);
+                });
+            } else {
+                console.log("login failed");
+            }
         }
     };
     $scope.signUp = function() {

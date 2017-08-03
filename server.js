@@ -38,6 +38,62 @@ app.listen(8083, function() {
     console.log("listening on 8083");
 });
 
+app.get('/login', function(req, res) {
+    var keys = req.query;
+    var data = {};
+    var identifyQuery = "select password from users where username = '" + keys.username + "'";
+    requests.database(identifyQuery, function(identifyRes) {
+        if(identifyRes[0].password == keys.password) {
+            console.log('\tMATCH');
+            var fullLoginQuery = "select * from users where username = '" + keys.username + "'";
+            requests.database(fullLoginQuery, function(fullLoginResArray) {
+                var fullLoginRes = fullLoginResArray[0];
+                data.success = true;
+                data.name = fullLoginRes.fullName;
+                data.username = fullLoginRes.username;
+                data.userID = fullLoginRes.userID;
+                data.userBio = fullLoginRes.bio;
+                data.status = fullLoginRes.status;
+                res.send(data);
+            });
+        } else {
+            data.success = false;
+            res.send(data);
+        }
+    });
+});
+
+app.get("/p-getimg", function(req, res) {
+    var userID = req.query.userID;
+    console.log("\t" + userID);
+    fs.readdir(__dirname + "/datastore/users/" + userID, function(err, data) {
+        if(err)
+            throw err;
+        var filename;
+        var contentType;
+        for(var i in data) {
+            if(data[i] == "profile.png") {
+                filename = "profile.png";
+                contentType = "image/png"; break;
+            } else if(data[i] == "profile.jpg") {
+                filename = "profile.jpg";
+                contentType = "image/jpeg"; break;
+            } else if(data[i] == "profile.jpeg") {
+                filename = "profile.jpeg";
+                contentType = "image/jpeg"; break;
+            }
+        }
+        fs.readFile(__dirname + "/datastore/users/" + userID + "/" + filename, function(err, data) {
+            if(err)
+                throw err;
+            res.writeHead(200, {"Content-Type": contentType});
+            res.end(data);
+        });
+    });
+    
+}); 
+
+// MULTIPART DATA HANDLING
 var baseUserDir = __dirname + "/datastore/users/";
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
