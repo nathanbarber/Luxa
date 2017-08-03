@@ -231,10 +231,9 @@ u$er = {
 function renderProfile() {
     $('.userhead .name').text(u$er.name);
     $('.userhead .img').css({
-        background: "url('data:'" + $user.profileDataType + ";" + $user.profile + ") center no-repeat",
+        background: "url('data:image/png;base64," + u$er.profile + "') center no-repeat",
         backgroundSize: "cover" 
     });
-    console.log(u$er.profile);
     $('.userbody .description').text(u$er.bio);
     $('.userbody .status').text(u$er.status.toUpperCase());
     $('.login').css('display', 'none');

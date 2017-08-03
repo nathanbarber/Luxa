@@ -43,22 +43,28 @@ app.get('/login', function(req, res) {
     var data = {};
     var identifyQuery = "select password from users where username = '" + keys.username + "'";
     requests.database(identifyQuery, function(identifyRes) {
-        if(identifyRes[0].password == keys.password) {
-            console.log('\tMATCH');
-            var fullLoginQuery = "select * from users where username = '" + keys.username + "'";
-            requests.database(fullLoginQuery, function(fullLoginResArray) {
-                var fullLoginRes = fullLoginResArray[0];
-                data.success = true;
-                data.name = fullLoginRes.fullName;
-                data.username = fullLoginRes.username;
-                data.userID = fullLoginRes.userID;
-                data.userBio = fullLoginRes.bio;
-                data.status = fullLoginRes.status;
+        if(identifyRes.length > 0) {
+            if(identifyRes[0].password == keys.password) {
+                console.log('\tMATCH');
+                var fullLoginQuery = "select * from users where username = '" + keys.username + "'";
+                requests.database(fullLoginQuery, function(fullLoginResArray) {
+                    var fullLoginRes = fullLoginResArray[0];
+                    data.success = true;
+                    data.name = fullLoginRes.fullName;
+                    data.username = fullLoginRes.username;
+                    data.userID = fullLoginRes.userID;
+                    data.userBio = fullLoginRes.bio;
+                    data.status = fullLoginRes.status;
+                    res.send(data);
+                });
+            } else {
+                data.success = false;
                 res.send(data);
-            });
+            }
         } else {
             data.success = false;
             res.send(data);
+            console.log("no such user");
         }
     });
 });
@@ -69,14 +75,12 @@ app.get("/p-getimg", function(req, res) {
     fs.readdir(__dirname + "/datastore/users/" + userID, function(err, data) {
         if(err)
             throw err;
-        var cluster = getProfileContentType(data);
-        var filename = cluster[0];
-        var contentType = cluster[1];
-        fs.readFile(__dirname + "/datastore/users/" + userID + "/" + filename, function(err, data) {
+        fs.readFile(__dirname + "/datastore/users/" + userID + "/profile.png", function(err, imgData) {
             if(err)
                 throw err;
-            res.writeHead(200, {"Content-Type": contentType});
-            res.end(data);
+            res.writeHead(200, {"Content-Type": "image/png"});
+            var dataEncodedBase64 = new Buffer(imgData).toString('base64');
+            res.end(dataEncodedBase64);
         });
     });
     
@@ -116,22 +120,4 @@ function generateNewUserID(callback) {
             callback(newUserID);
         }
     });
-}
-
-function getProfileContentType(fileStreamData) {
-    var filename;
-    var contentType;
-    for(var i in fileStreamData) {
-        if(data[i] == "profile.png") {
-            filename = "profile.png";
-            contentType = "image/png"; break;
-        } else if(data[i] == "profile.jpg") {
-            filename = "profile.jpg";
-            contentType = "image/jpeg"; break;
-        } else if(data[i] == "profile.jpeg") {
-            filename = "profile.jpeg";
-            contentType = "image/jpeg"; break;
-        }
-    }
-    return [filename, contentType];
 }
