@@ -94,7 +94,7 @@ app.controller('profile', function($scope, $location, $http) {
                     }
                 })
                 .then(function(imgres) {
-                    u$er.profile = imgres;
+                    u$er.profile = imgres.data;
                     $('.login').animate({
                         opacity: 0
                     }, 300, function() {
@@ -230,10 +230,11 @@ u$er = {
 
 function renderProfile() {
     $('.userhead .name').text(u$er.name);
-    /*$('.userhead .img').css({
-        background: "url('" +  + "') center no-repeat",
+    $('.userhead .img').css({
+        background: "url('data:'" + $user.profileDataType + ";" + $user.profile + ") center no-repeat",
         backgroundSize: "cover" 
-    });*/
+    });
+    console.log(u$er.profile);
     $('.userbody .description').text(u$er.bio);
     $('.userbody .status').text(u$er.status.toUpperCase());
     $('.login').css('display', 'none');

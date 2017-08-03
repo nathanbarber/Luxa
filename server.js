@@ -69,20 +69,9 @@ app.get("/p-getimg", function(req, res) {
     fs.readdir(__dirname + "/datastore/users/" + userID, function(err, data) {
         if(err)
             throw err;
-        var filename;
-        var contentType;
-        for(var i in data) {
-            if(data[i] == "profile.png") {
-                filename = "profile.png";
-                contentType = "image/png"; break;
-            } else if(data[i] == "profile.jpg") {
-                filename = "profile.jpg";
-                contentType = "image/jpeg"; break;
-            } else if(data[i] == "profile.jpeg") {
-                filename = "profile.jpeg";
-                contentType = "image/jpeg"; break;
-            }
-        }
+        var cluster = getProfileContentType(data);
+        var filename = cluster[0];
+        var contentType = cluster[1];
         fs.readFile(__dirname + "/datastore/users/" + userID + "/" + filename, function(err, data) {
             if(err)
                 throw err;
@@ -127,4 +116,22 @@ function generateNewUserID(callback) {
             callback(newUserID);
         }
     });
+}
+
+function getProfileContentType(fileStreamData) {
+    var filename;
+    var contentType;
+    for(var i in fileStreamData) {
+        if(data[i] == "profile.png") {
+            filename = "profile.png";
+            contentType = "image/png"; break;
+        } else if(data[i] == "profile.jpg") {
+            filename = "profile.jpg";
+            contentType = "image/jpeg"; break;
+        } else if(data[i] == "profile.jpeg") {
+            filename = "profile.jpeg";
+            contentType = "image/jpeg"; break;
+        }
+    }
+    return [filename, contentType];
 }
