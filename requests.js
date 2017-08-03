@@ -13,9 +13,9 @@ module.exports = {
     },
     database: function(querystring, callback) {
         var connection = mysql.createConnection({
-            host: "localhost",
-            user: 'username',
-            password: 'pass',
+            host: 'localhost',
+            user: 'nodeAuth',
+            password: 'a60bpdf62ndfl',
             database: 'lux'
         });
         connection.query(querystring, function(err, res) {
