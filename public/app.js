@@ -51,22 +51,17 @@ app.controller("home", function($scope) {
 });
 
 app.controller('profile', function($scope, $location, $http) {
-    $scope.user = {
-        name: undefined,
-        id: undefined,
-        profile: undefined,
-        bio: undefined,
-        status: undefined,
-        storeItems: []
-    };
+    (function() {
+        if(u$er.id) {
+            renderProfile();
+        } else {
+            $('.login').css({
+                display: 'table'
+            });
+        }
+    })();
     $scope.renderUserProfile = function() {
-        $('.userhead .name').text($scope.user.name);
-        /*$('.userhead .img').css({
-            background: "url('" +  + "') center no-repeat",
-            backgroundSize: "cover" 
-        });*/
-        $('.userbody .description').text($scope.user.description);
-        $('.userbody .status').text($scope.user.status.toUpperCase());
+        renderProfile();
     };
     $scope.login = function() {
         var keys = {
@@ -82,41 +77,34 @@ app.controller('profile', function($scope, $location, $http) {
             callback(data);
         },
         function() {
-            console.log("error");
+            console.log("ERR __ COULD NOT GET USER DATA");
         });
         function callback(res) {
             var data = res.data;
-            console.log(data);
             if(data.success == true) {
-                console.log("data succeeded");
-                $scope.user.name = data.name;
-                $scope.user.id = data.userID;
-                $scope.user.description = data.userBio;
-                $scope.user.status = data.status;
+                u$er.name = data.name;
+                u$er.id = data.userID;
+                u$er.bio = data.userBio;
+                u$er.status = data.status;
                 $http({
                     method: "GET",
                     url: '/p-getimg',
                     params: {
-                        userID: $scope.user.id
+                        userID: u$er.id
                     }
                 })
                 .then(function(imgres) {
-                    console.log(imgres);
-                    $scope.user.profile = imgres;
+                    u$er.profile = imgres;
                     $('.login').animate({
                         opacity: 0
                     }, 300, function() {
                         $scope.renderUserProfile();
-                        $('.login').css('display', 'none');
-                        $('.user').animate({
-                            opacity: 1
-                        }, 300);
                     });
                 }, function(err) {
-                    console.log(err);
+                    console.log("IMGERR __ COULD NOT GET IMAGE");
                 });
             } else {
-                console.log("login failed");
+                alert("Login failed");
             }
         }
     };
@@ -139,7 +127,7 @@ app.controller('signup', function($scope, $http, $location) {
                 };
                 reader.readAsDataURL(input.files[0]);
             } else {
-                console.log("read failed");
+                alert("File read failed");
             }
         }
         $('input:file').change(function() {
@@ -222,15 +210,37 @@ app.controller('signup', function($scope, $http, $location) {
                     $location.path('profile');
                 }
             });
-            console.log('works');
         } else {
-            console.log(advisoryMessage);
+            alert(advisoryMessage);
             advisoryMessage = '';
         }
     };
 });
 
-// OUTER UI FUNCTIONS
+// OUTER UI FUNCTIONS AND DATA
+
+u$er = {
+    name: undefined,
+    id: undefined,
+    profile: undefined,
+    bio: undefined,
+    status: undefined,
+    storeItems: []
+};
+
+function renderProfile() {
+    $('.userhead .name').text(u$er.name);
+    /*$('.userhead .img').css({
+        background: "url('" +  + "') center no-repeat",
+        backgroundSize: "cover" 
+    });*/
+    $('.userbody .description').text(u$er.bio);
+    $('.userbody .status').text(u$er.status.toUpperCase());
+    $('.login').css('display', 'none');
+    $('.user').animate({
+        opacity: 1
+    }, 300);
+}
 
 function showLoadPanel() {
 

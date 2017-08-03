@@ -12,7 +12,7 @@
     background-color: #aaaaaa;
     text-align: center;
     z-index: 10;
-    display: table;
+    display: none;
 }
 
 .login .box {
