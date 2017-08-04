@@ -61,15 +61,17 @@ app.controller("home", function($scope) {
 });
 
 app.controller('login', function($scope, $location, $http) {
+    isLoginFromSignup = false;
     $scope.$on('$locationChangeStart', function(event) {
-        if(!successfulLogin) {
-            $location.path("/login");
-            console.log("user block is still undefined");
-        } else {
-            console.log("user block is now defined");
+        if(!signUpRoute) {
+            if(!successfulLogin) {
+                $location.path("/login");
+                console.log("blocking");
+            } else {
+                console.log("user logged in");
+            }
         }
     });
-    $scope.renderUserProfileControl = {};
     $scope.login = function() {
         var keys = {
             username: $('.username').val(),
@@ -118,7 +120,8 @@ app.controller('login', function($scope, $location, $http) {
         }
     };
     $scope.signUp = function() {
-        $location.path("signup");
+        signUpRoute = true;
+        $location.path("/signup");
     };
     //AUTOEXE
     (function() {
@@ -149,6 +152,15 @@ app.controller('profile', function($scope, $location, $http) {
 });
 
 app.controller('signup', function($scope, $http, $location) {
+    signUpRoute = false;
+    $scope.$on('$locationChangeStart', function(event) {
+        if(!isLoginFromSignup) {
+            $location.path("/signup");
+            console.log("blocked");
+        } else {
+            console.log("passed");
+        }
+    });
     (function responsiveImageInput() {
         function readURL(input) {
             if(input.files && input.files[0]) {
@@ -186,37 +198,57 @@ app.controller('signup', function($scope, $http, $location) {
     };
     $scope.submitNewUser = function() {
         var ajaxConditional = false;
-        var advisoryMessage;
+        var advisoryMessage = "none";
         var inputArray = $('.text').toArray();
         $('.name').val($('.name').val().replace(' ', '_'));
         for(var j in inputArray) {
             if(inputArray[j].value != '') {
-                advisoryMessage = "You must fill all fields!";
-                if(isNaN(inputArray[j].value) && inputArray[j].value.length > 3) {
-                    advisoryMessage = "All fields must have a minimum length of 4.";
+                if(inputArray[j].value.length > 3) {
                     if(!(isNaN(inputArray[j].value))) {
-                        advisoryMessage = "Please use letters and numbers.";
+                        advisoryMessage = "Please use both letters and numbers.";
+                        ajaxConditional = false;
+                        break;
                     }
                     if(!(inputArray[j].value.includes("'"))) {
-                        advisoryMessage = "Please remove special characters.";
-                        if(inputArray[j].value != "test") {
-                            var specials=/^[\w&.-_]+$/;
-                            if(specials.test(inputArray[j].value)) {
-                                if($('.password').val() == $('.verifypassword').val()) {
+                        var specials=/^[\w&.-_]+$/;
+                        if(specials.test(inputArray[j].value)) {
+                            if($('.password').val() == $('.verifypassword').val()) {
+                                if(inputArray[j].value != "test") {
                                     ajaxConditional = true;
+                                    isLoginFromSignup = true;
                                     advisoryMessage = '';
+                                    alert("passed");
                                 } else {
-                                    advisoryMessage = "Passwords don\'t match!";
-                                } 
+                                    console.log("this was just a test");
+                                    ajaxConditional = false;
+                                }
                             } else {
-                                advisoryMessage = "Please remove special characters.";
+                                advisoryMessage = "Passwords don't match!";
+                                ajaxConditional = false;
                                 break;
-                            }
-                        } else {break;}
-                    } else {break;}
-                } else {break;}
-            } else {break;}
+                            } 
+                        } else {
+                            advisoryMessage = "Please remove special characters.";
+                            ajaxConditional = false;
+                            break;
+                        }
+                    } else {
+                        advisoryMessage = "Please remove special characters.";
+                        ajaxConditional = false;
+                        break;
+                    }
+                } else {
+                    advisoryMessage = "All fields must have a minimum length of 4.";
+                    ajaxConditional = false;
+                    break;
+                }
+            } else {
+                advisoryMessage = "You must fill all fields!";
+                ajaxConditional = false;
+                break;
+            }
         }
+        console.log(ajaxConditional);
         if(ajaxConditional) {
             $('.name').val($('.name').val().replace('_', ' '));
             var data = new FormData();
@@ -242,7 +274,8 @@ app.controller('signup', function($scope, $http, $location) {
                         background: "initial",
                         backgroundColor: "transparent"
                     });
-                    $location.path('profile');
+                    $location.path('/login');
+                    $scope.$apply();
                 }
             });
         } else {
@@ -274,6 +307,8 @@ u$er = {
 };
 
 successfulLogin = false;
+signUpRoute = false;
+isLoginFromSignup = false;
 
 function showLoadPanel() {
 

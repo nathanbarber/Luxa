@@ -32,3 +32,8 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.nav .tasks .micro:hover {
+    color: #0c89b8;
+    border-bottom: #0c89b8 3px solid;
+}
