@@ -37,6 +37,7 @@
     outline-style: none;
     display: block;
     padding-left: 10px;
+    padding-top: 4px;
 }
 
 .login .submit {
