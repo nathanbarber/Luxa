@@ -16,7 +16,7 @@ module.exports = {
             host: 'localhost',
             user: 'nodeAuth',
             password: 'a60bpdf62ndfl',
-            database: 'lux'
+            database: 'cluster'
         });
         connection.query(querystring, function(err, res) {
             if(err) {

@@ -48,7 +48,7 @@
     font-size: 20px;
 }
 
-.userstore {
+.userevent {
     width: 100%;
     margin-top: 100px;
     height: 140px;
@@ -61,7 +61,7 @@
     text-align: left;
 }
 
-.userstore .item {
+.userevent .item {
     background: #8f8f8f center no-repeat;
     border-radius: 10px;
     margin-left: 10px;
@@ -72,6 +72,6 @@
     overflow-y: hidden;
 }
 
-.userstore .end {
+.userevent .end {
     margin-right: 10px;
 }
