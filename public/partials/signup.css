@@ -29,6 +29,7 @@ body {
 }
 
 .signupform button {
+    padding-top: 4px;
     margin-top: 50px;
 }
 
@@ -88,7 +89,7 @@ body {
     color: #434343;
     background-color: #afafaf;
     border-radius: 10px;
-    padding: 3px;
+    padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
     font-weight: bold;

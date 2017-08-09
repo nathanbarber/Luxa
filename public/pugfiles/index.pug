@@ -1,6 +1,6 @@
 html
     head
-        title Luxa
+        title cluster
         //Main CSS
         link(href="style.css", rel="stylesheet")
         link(href="reusables.css", rel="stylesheet")
@@ -17,9 +17,9 @@ html
         //Scripts
         script(src="app.js")
     body
-        div.app(ng-app="luxa")
+        div.app(ng-app="cluster")
             div(ng-controller="nav").nav
-                div.title L u x a
+                div.title C l u s t e r
                 div.tasks
                     div(ng-repeat="x in tasks" ng-mousedown="to(x.toLowerCase())").micro {{x}}
             div(ng-view).content

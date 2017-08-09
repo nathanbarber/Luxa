@@ -1,4 +1,4 @@
-var app = angular.module("luxa", ["ngRoute"]);
+var app = angular.module("cluster", ["ngRoute"]);
 app.config(function($routeProvider, $qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
     $routeProvider

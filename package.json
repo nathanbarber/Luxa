@@ -1,5 +1,5 @@
 {
-  "name": "luxa-local-bay",
+  "name": "cluster",
   "version": "1.0.0",
   "description": "A local, small merchant, online store network",
   "main": "server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nathanbarber/Luxa.git"
+    "url": "git+https://github.com/nathanbarber/cluster.git"
   },
   "author": "Nathan Barber",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nathanbarber/Luxa/issues"
+    "url": "https://github.com/nathanbarber/cluster/issues"
   },
-  "homepage": "https://github.com/nathanbarber/Luxa#readme",
+  "homepage": "https://github.com/nathanbarber/cluster#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
