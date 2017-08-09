@@ -54,7 +54,6 @@ app.get('/login', function(req, res) {
                     data.username = fullLoginRes.username;
                     data.userID = fullLoginRes.userID;
                     data.userBio = fullLoginRes.bio;
-                    data.status = fullLoginRes.status;
                     res.send(data);
                 });
             } else {

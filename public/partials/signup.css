@@ -1,9 +1,21 @@
 body {
-    background-color: #aaaaaa;
+    background-color: #bbbbbb;
+    opacity: 0.8;
+}
+
+.back {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    font-size: 20px;
+    color: #6f6f6f;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
 }
 
 .signupform {
-    background-color: #434343;
+    background-color: transparent;
     border-radius: 10px;
     margin-top: 60px;
     padding: 30px;
@@ -18,25 +30,24 @@ body {
 
 .signupform input:not(.profilePic) {
     font-size: 20px;
-    background-color: #afafaf;
+    background-color: transparent;
     color: #323232;
-    border-radius: 10px;
     padding: 10px;
     display: block;
     border: none;
+    border-bottom: 3px solid #6f6f6f;
     outline-style: none;
     margin-bottom: 30px;
 }
 
 .signupform button {
-    padding-top: 4px;
     margin-top: 50px;
 }
 
 .picWrapper {
     width: 200px;
     height: 200px;
-    border: 3px dashed #999999;
+    border: 3px solid #6f6f6f;
     border-radius: 10px;
     position: relative;
     overflow: hidden;
@@ -86,21 +97,11 @@ body {
 .picWrapper label {
     overflow: hidden;
     cursor: pointer;
-    color: #434343;
-    background-color: #afafaf;
+    color: #afafaf;
+    background-color: #6f6f6f;
     border-radius: 10px;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
     font-weight: bold;
-    -webkit-transition: background-color 300ms ease-out;
-    -moz-transition: background-color 300ms ease-out;
-    transition: background-color 300ms ease-out;
-}
-
-.picWrapper label:hover {
-    background-color: #cfcfcf;
-    -webkit-transition: background-color 300ms ease-out;
-    -moz-transition: background-color 300ms ease-out;
-    transition: background-color 300ms ease-out;
 }

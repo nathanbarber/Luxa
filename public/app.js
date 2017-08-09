@@ -44,6 +44,7 @@ app.controller("nav", function($scope, $location) {
 });
 
 app.controller("home", function($scope) {
+    navShown();
     $scope.dummyData = [
         {
             head: "one",
@@ -61,7 +62,11 @@ app.controller("home", function($scope) {
 });
 
 app.controller('login', function($scope, $location, $http) {
+    navHidden();
     isLoginFromSignup = false;
+    (function animation() {
+        $('.box, .logo').addClass('animated fadeInUp');
+    })();
     $scope.$on('$locationChangeStart', function(event) {
         if(!signUpRoute) {
             if(!successfulLogin) {
@@ -104,6 +109,9 @@ app.controller('login', function($scope, $location, $http) {
                 })
                 .then(function(imgres) {
                     u$er.profile = imgres.data;
+                    $('.logo').animate({
+                        opacity: 0
+                    }, 300)
                     $('.login').animate({
                         opacity: 0
                     }, 300, function() {
@@ -136,6 +144,7 @@ app.controller('login', function($scope, $location, $http) {
 });
 
 app.controller('profile', function($scope, $location, $http) {
+    navShown();
     $scope.renderProfile = function() {
         $('.userhead .name').text(u$er.name);
         $('.userhead .img').css({
@@ -143,7 +152,6 @@ app.controller('profile', function($scope, $location, $http) {
             backgroundSize: "cover" 
         });
         $('.userbody .description').text(u$er.bio);
-        $('.userbody .status').text(u$er.status.toUpperCase());
         $('.user').animate({
             opacity: 1
         }, 300);
@@ -152,6 +160,7 @@ app.controller('profile', function($scope, $location, $http) {
 });
 
 app.controller('signup', function($scope, $http, $location) {
+    navHidden();
     signUpRoute = false;
     $scope.$on('$locationChangeStart', function(event) {
         if(!isLoginFromSignup) {
@@ -168,7 +177,10 @@ app.controller('signup', function($scope, $http, $location) {
                 reader.onload = function(e) {
                     $('.fill').css({
                         background: "url('" + e.target.result + "') no-repeat center",
-                        backgroundSize: 'cover'
+                        backgroundSize: 'cover',
+                    });
+                    $(".picWrapper").css({
+                        border: 'none'
                     });
                     $userImage = e.target.result;
                 };
@@ -181,6 +193,10 @@ app.controller('signup', function($scope, $http, $location) {
             readURL(this);
         });
     })();
+    $scope.returnToLogin = function() {
+        isLoginFromSignup = true;
+        $location.path("/login");
+    };
     $scope.fadeUI = function() {
         $('.fill').animate({
             opacity: 0.7
@@ -217,10 +233,9 @@ app.controller('signup', function($scope, $http, $location) {
                                     ajaxConditional = true;
                                     isLoginFromSignup = true;
                                     advisoryMessage = '';
-                                    alert("passed");
                                 } else {
-                                    console.log("this was just a test");
                                     ajaxConditional = false;
+                                    break;
                                 }
                             } else {
                                 advisoryMessage = "Passwords don't match!";
@@ -283,32 +298,34 @@ app.controller('signup', function($scope, $http, $location) {
             advisoryMessage = '';
         }
     };
-});
-
-// DIRECTIVES
-
-app.directive("renderUserProfile", function() {
-    return {
-        controller: function($scope) {
-            
-        }
+    $scope.restoreFields = function() {
+        var form = document.getElementById("signUpForm");
+        form.reset();
     };
 });
 
-// OUTER UI FUNCTIONS AND DATA
+// OUTER DATA
 
 u$er = {
     name: undefined,
     id: undefined,
     profile: undefined,
     bio: undefined,
-    status: undefined,
-    storeItems: []
 };
 
 successfulLogin = false;
 signUpRoute = false;
 isLoginFromSignup = false;
+
+// OUTER FUNCTIONS
+
+function navHidden() {
+    $('.nav').css('display', 'none');
+}
+
+function navShown() {
+    $('.nav').css('display', 'initial');
+}
 
 function showLoadPanel() {
 

@@ -10,27 +10,24 @@
 }
 
 .button-style-one {
+    outline: none;
     margin-top: 20px;
-    color: #afafaf;
+    color: #6f6f6f;
     background-color: transparent;
     width: 100px;
     height: 30px;
     font-size: 16px;
     border: none;
     border-radius: 10px;
-    border: 3px #afafaf solid;
-    outline: none;
+    border: 3px #6f6f6f solid;
     -webkit-transition: background-color 0.3s, color 0.3s ease-in 0s;
     -moz-transition: background-color 0.3s, color 0.3s ease-in 0s;
     transition: background-color 0.3s, color 0.3s ease-in 0s;
 }
 
 .button-style-one:hover {
-    color: #323232;
-    background-color: #afafaf;
-    -webkit-transition: background-color 0.3s, color 0.3s ease-in 0s;
-    -moz-transition: background-color 0.3s, color 0.3s ease-in 0s;
-    transition: background-color 0.3s, color 0.3s ease-in 0s;
+    color: #9f9f9f;
+    background-color: #6f6f6f;
 }
 
 .fadeOnHover {

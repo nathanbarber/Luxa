@@ -15,8 +15,8 @@ module.exports = {
         var connection = mysql.createConnection({
             host: 'localhost',
             user: 'nodeAuth',
-            password: 'a60bpdf62ndfl',
-            database: 'cluster'
+            password: 'asdhlsfiga8h3498340g',
+            database: 'clusterdb'
         });
         connection.query(querystring, function(err, res) {
             if(err) {

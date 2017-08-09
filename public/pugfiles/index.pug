@@ -6,6 +6,7 @@ html
         link(href="reusables.css", rel="stylesheet")
         link(href="partials/footer.css", rel="stylesheet")
         link(href="partials/navbar.css", rel="stylesheet")
+        link(href="dependencies/font/_fonts.css", rel="stylesheet")
         //Pages CSS
         link(href="partials/profile.css", rel="stylesheet")
         link(href="partials/login.css", rel="stylesheet")
@@ -14,12 +15,13 @@ html
         script(src="dependencies/angular-route.js")
         script(src="dependencies/jquery-3.2.1.min.js")
         script(src="dependencies/jquery-ui.min.js")
+        link(href="dependencies/animate.css", rel="stylesheet")
         //Scripts
         script(src="app.js")
     body
         div.app(ng-app="cluster")
             div(ng-controller="nav").nav
-                div.title C l u s t e r
+                div.title Cluster
                 div.tasks
                     div(ng-repeat="x in tasks" ng-mousedown="to(x.toLowerCase())").micro {{x}}
             div(ng-view).content

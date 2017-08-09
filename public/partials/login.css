@@ -21,14 +21,14 @@
     border-radius: 10px;
     text-align: center;
     overflow: hidden;
-    background-color: #434343;
+    background-color: transparent;
     opacity: 1.0;
     margin-top: 40vh;
 }
 
 .login .username {
-    border: none;
-    background-color: #9f9f9f;
+    border: 3px #6f6f6f solid;
+    background-color: transparent;
     color: #323232;
     font-family: Avenir, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border-radius: 10px;
@@ -41,24 +41,24 @@
 }
 
 .login .submit {
+    outline: none;
     margin-top: 20px;
-    color: #9f9f9f;
+    color: #6f6f6f;
     background-color: transparent;
     width: 100px;
     height: 30px;
     font-size: 16px;
     border: none;
     border-radius: 10px;
-    border: 3px #9f9f9f solid;
-    outline: none;
+    border: 3px #6f6f6f solid;
     -webkit-transition: background-color 0.3s, color 0.3s ease-in 0s;
     -moz-transition: background-color 0.3s, color 0.3s ease-in 0s;
     transition: background-color 0.3s, color 0.3s ease-in 0s;
 }
 
 .login .submit:hover {
-    color: #323232;
-    background-color: #9f9f9f;
+    color: #9f9f9f;
+    background-color: #6f6f6f;
     -webkit-transition: background-color 0.3s, color 0.3s ease-in 0s;
     -moz-transition: background-color 0.3s, color 0.3s ease-in 0s;
     transition: background-color 0.3s, color 0.3s ease-in 0s;
@@ -66,7 +66,15 @@
 
 .signup {
     text-decoration: none;
-    color: #9f9f9f;
+    color: #6f6f6f;;
     font-size: 20px;
     cursor: pointer;
+}
+
+.logo {
+    font-size: 50px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    color: #424242;
+    font-family: Pacifico;
 }

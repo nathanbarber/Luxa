@@ -1,7 +1,8 @@
 div.section#signup(ng-controller="signup")
     link(href="partials/signup.css", rel="stylesheet")
+    div.back(ng-mousedown="returnToLogin()") Return To Login
     div.signupform.m-center
-        form
+        form#signUpForm
             input.text.name(spellcheck="false" placeholder="Full Name")
             input.text.username(spellcheck="false" placeholder="Username")
             input.text.password(spellcheck="false" type="password" placeholder="Password")
