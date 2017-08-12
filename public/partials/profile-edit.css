@@ -1,0 +1,50 @@
+#profile-edit {
+    display: none;
+    z-index: 1000;
+}
+
+.panel {
+    width: 30vw;
+    padding: 40px;
+    background-color: lightgrey;
+    display: table-cell;
+    vertical-align: middle;
+    border-radius: 10px;
+    color: #8f8f8f;
+}
+
+.panel .fieldname{
+    font-size: 30px;
+    margin: 10px;
+}
+
+.image {
+
+}
+
+.panel input {
+    border: none;
+    border-bottom: 3px #6f6f6f solid;
+    background-color: transparent;
+    font-size: 20px;
+    margin-bottom: 40px;
+    color: #6f6f6f;
+    padding-bottom: 5px;
+    outline: none;
+}
+
+.panel textarea {
+    border: none;
+    background-color: transparent;
+    border-left: 3px solid #6f6f6f;
+    height: 140px;
+    font-size: 20px;
+    resize: none;
+    color: #6f6f6f;
+    padding-left: 10px;
+    outline: none;
+}
+
+.panel .submit {
+    margin-top: 100px;
+}

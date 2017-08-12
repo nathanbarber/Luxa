@@ -1,0 +1,12 @@
+link(href="partials/profile-edit.css", rel="stylesheet")
+div.layover#profile-edit(ng-controller="profile-edit")
+    div.panel.m-center
+        div.image
+        div.fieldname Full Name
+        input(placeholder="{{fullname}}" spellcheck="false")
+        div.fieldname Biography
+        textarea(placeholder="{{bio}}" spellcheck="false")
+        br
+        br
+        br
+        button.button-style-one(ng-mousedown="submit()") Update

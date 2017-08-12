@@ -33,6 +33,7 @@ app.run(function($rootScope, $location) {
 });
 
 app.controller("nav", function($scope, $location) {
+    //SCOPE FUNCTIONS
     $scope.tasks = ['Feed', 'Friends', 'Profile', 'Cart'];
     $scope.to = function(data) {
         if(data == "feed") {
@@ -61,12 +62,74 @@ app.controller("home", function($scope) {
     ];
 });
 
+app.controller('profile', function($scope, $location, $http) {
+    navShown();
+    //AUTOEXE
+    (function() {
+
+    })();
+    //SCOPE FUNCTIONS
+    $scope.renderProfile = function() {
+        $('.userhead .name').text(u$er.name);
+        $('.userhead .img').css({
+            background: "url('data:image/png;base64," + u$er.profile + "') center no-repeat",
+            backgroundSize: "cover" 
+        });
+        $('.userbody .status').text(u$er.status.toUpperCase());
+        $('.userbody .description').text(u$er.bio);
+        $('.user').animate({
+            opacity: 1
+        }, 300);
+    };
+    $scope.renderProfile();
+    $scope.showProfileEdit = function() {
+        $("#profile-edit").css({
+            display: 'table'
+        });
+    };
+});
+
+app.controller('profile-edit', function($scope, $http) {
+    $scope.submit = function() {
+        var updatedValues = {
+            fullName: $('.panel input').val(),
+            bio: $('.panel textarea').val()
+        };
+        for(var i in updatedValues) {
+            updatedValues[i] = updatedValues[i].replace(/\'/g, '');
+            console.log(updatedValues[i]);
+        }
+        console.log(updatedValues);
+        $.ajax({
+            url: '/updateUser',
+            data: updatedValues,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function(data) {
+                console.log('success');
+            }
+        });
+    };
+});
+
 app.controller('login', function($scope, $location, $http) {
     navHidden();
     isLoginFromSignup = false;
+    //AUTOEXE
+    (function() {
+        if(u$er.name != undefined) {
+            $scope.renderUserProfile();
+        } else {
+            $('.login').css({
+                display: 'table'
+            });
+        }
+    })();
     (function animation() {
         $('.box, .logo').addClass('animated fadeInUp');
     })();
+    //SCOPE FUNCTIONS
     $scope.$on('$locationChangeStart', function(event) {
         if(!signUpRoute) {
             if(!successfulLogin) {
@@ -131,33 +194,6 @@ app.controller('login', function($scope, $location, $http) {
         signUpRoute = true;
         $location.path("/signup");
     };
-    //AUTOEXE
-    (function() {
-        if(u$er.name != undefined) {
-            $scope.renderUserProfile();
-        } else {
-            $('.login').css({
-                display: 'table'
-            });
-        }
-    })();
-});
-
-app.controller('profile', function($scope, $location, $http) {
-    navShown();
-    $scope.renderProfile = function() {
-        $('.userhead .name').text(u$er.name);
-        $('.userhead .img').css({
-            background: "url('data:image/png;base64," + u$er.profile + "') center no-repeat",
-            backgroundSize: "cover" 
-        });
-        $('.userbody .status').text(u$er.status.toUpperCase());
-        $('.userbody .description').text(u$er.bio);
-        $('.user').animate({
-            opacity: 1
-        }, 300);
-    };
-    $scope.renderProfile();
 });
 
 app.controller('signup', function($scope, $http, $location) {
@@ -171,6 +207,7 @@ app.controller('signup', function($scope, $http, $location) {
             console.log("passed");
         }
     });
+    //AUTOEXE
     (function responsiveImageInput() {
         function readURL(input) {
             if(input.files && input.files[0]) {
@@ -194,6 +231,7 @@ app.controller('signup', function($scope, $http, $location) {
             readURL(this);
         });
     })();
+    //SCOPE FUNCTIONS
     $scope.returnToLogin = function() {
         isLoginFromSignup = true;
         $location.path("/login");

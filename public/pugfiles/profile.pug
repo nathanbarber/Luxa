@@ -11,7 +11,8 @@ div.section#profile(ng-controller="profile")
                 div.text +
             div.userAction#remove
                 div.text -
-            div.userAction#settings
+            div.userAction#settings(ng-mousedown="showProfileEdit()")
                 img.img(src="img/settings.png")
         div.userevent
             div.event
+    include ./profile-edit.pug

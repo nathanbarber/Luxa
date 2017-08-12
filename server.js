@@ -112,6 +112,11 @@ app.post('/submitNewUser', upload.any(), function(req, res) {
     res.end();
 });
 
+app.post('/updateUser', upload.any(), function(req, res) {
+    console.log(req.body.fullName + "  " + req.body.bio);
+    res.end();
+});
+
 // UTILITY
 function generateNewUserID(callback) {
     var newUserID = Math.floor(Math.random() * 100000000);
