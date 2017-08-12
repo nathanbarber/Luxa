@@ -58,12 +58,11 @@
 .userevent {
     width: 100%;
     margin-top: 100px;
-    height: 140px;
     border-radius: 10px;
     background-color: #dedede;
+    padding-top: 50px;
+    padding-bottom: 50px;
     position: relative;
-    overflow-x: auto;
-    overflow-y: auto;
     white-space: nowrap;
     text-align: left;
 }
@@ -81,4 +80,41 @@
 
 .userevent .end {
     margin-right: 10px;
+}
+
+.userActionWrapper {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.userAction {
+    width: 100px;
+    border-radius: 50%;
+    height: 100px;
+    background-color: lightgrey;
+    text-align: center;
+    font-size: 30px;
+    line-height: 100px;
+    color: #565656;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin: 10px;
+}
+
+.userAction:hover {
+    background-color: #b8b8b8;
+}
+
+.userAction .text {
+    user-select: none;
+    cursor: default;
+}
+
+.userAction .img {
+    width: 40px;
+    margin-top: 30px;
+    opacity: 0.8;
 }
