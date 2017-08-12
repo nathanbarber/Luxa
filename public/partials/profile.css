@@ -6,6 +6,8 @@
     opacity: 0;
 }
 
+/* USER NAME AND PROFILE */
+
 .user .userhead {
     position: relative;
     width: 100%;
@@ -40,6 +42,8 @@
     vertical-align: middle;
 }
 
+/* USER INFO BODY */
+
 .userbody {
     margin-top: 50px;
     text-align: left;
@@ -55,32 +59,7 @@
     font-size: 20px;
 }
 
-.userevent {
-    width: 100%;
-    margin-top: 100px;
-    border-radius: 10px;
-    background-color: #dedede;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    position: relative;
-    white-space: nowrap;
-    text-align: left;
-}
-
-.userevent .item {
-    background: #8f8f8f center no-repeat;
-    border-radius: 10px;
-    margin-left: 10px;
-    width: 30%;
-    height: 120px;
-    margin-top: 10px;
-    display: inline-block;
-    overflow-y: hidden;
-}
-
-.userevent .end {
-    margin-right: 10px;
-}
+/* USER ACTIONS */
 
 .userActionWrapper {
     position: relative;
@@ -117,4 +96,34 @@
     width: 40px;
     margin-top: 30px;
     opacity: 0.8;
+}
+
+/* POSTS BY USER */
+
+.userevent {
+    width: 100%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border-radius: 10px;
+    background-color: #dedede;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    position: relative;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.userevent .item {
+    background: #8f8f8f center no-repeat;
+    border-radius: 10px;
+    margin-left: 10px;
+    width: 30%;
+    height: 120px;
+    margin-top: 10px;
+    display: inline-block;
+    overflow-y: hidden;
+}
+
+.userevent .end {
+    margin-right: 10px;
 }
