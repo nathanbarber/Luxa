@@ -33,6 +33,13 @@
     vertical-align: middle;
 }
 
+.user .userhead .settings {
+    padding-left: 40px;
+    display: table-cell;
+    width: 50px;
+    vertical-align: middle;
+}
+
 .userbody {
     margin-top: 50px;
     text-align: left;

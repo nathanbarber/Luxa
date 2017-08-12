@@ -151,6 +151,7 @@ app.controller('profile', function($scope, $location, $http) {
             background: "url('data:image/png;base64," + u$er.profile + "') center no-repeat",
             backgroundSize: "cover" 
         });
+        $('.userbody .status').text(u$er.status.toUpperCase());
         $('.userbody .description').text(u$er.bio);
         $('.user').animate({
             opacity: 1
@@ -311,6 +312,7 @@ u$er = {
     id: undefined,
     profile: undefined,
     bio: undefined,
+    status: undefined
 };
 
 successfulLogin = false;
