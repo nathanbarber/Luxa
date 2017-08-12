@@ -112,9 +112,14 @@ app.post('/submitNewUser', upload.any(), function(req, res) {
     res.end();
 });
 
-app.post('/updateUser', upload.any(), function(req, res) {
-    console.log(req.body.fullName + "  " + req.body.bio);
-    res.end();
+app.post('/updateUser', function(req, res) {
+    var query = "update users set fullName = '" + req.body.fullName + 
+    "', bio = '" + req.body.bio + 
+    "' where username = '" + req.body.username + 
+    "'";
+    requests.database(query, function(res) {
+        console.log(res);
+    });
 });
 
 // UTILITY

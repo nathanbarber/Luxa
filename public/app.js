@@ -92,22 +92,26 @@ app.controller('profile', function($scope, $location, $http) {
 app.controller('profile-edit', function($scope, $http) {
     $scope.submit = function() {
         var updatedValues = {
+            username: u$er.username,
             fullName: $('.panel input').val(),
             bio: $('.panel textarea').val()
         };
         for(var i in updatedValues) {
             updatedValues[i] = updatedValues[i].replace(/\'/g, '');
-            console.log(updatedValues[i]);
         }
-        console.log(updatedValues);
         $.ajax({
             url: '/updateUser',
             data: updatedValues,
-            processData: false,
-            contentType: false,
-            type: 'POST',
+            method: 'POST',
             success: function(data) {
-                console.log('success');
+                u$er.fullName = updatedValues[1];
+                u$er.bio = updatedValues[2];
+                $('.userhead .name').val(u$er.fullName);
+                $('.userbody .description').val(u$er.bio);
+                $('#profile-edit').css({
+                    display: "none"
+                });
+                console.log('values updated');
             }
         });
     };
@@ -159,6 +163,7 @@ app.controller('login', function($scope, $location, $http) {
         function callback(res) {
             var data = res.data;
             if(data.success == true) {
+                u$er.username = $('.username').val();
                 u$er.name = data.name;
                 u$er.id = data.userID;
                 u$er.bio = data.userBio;
@@ -174,7 +179,7 @@ app.controller('login', function($scope, $location, $http) {
                     u$er.profile = imgres.data;
                     $('.logo').animate({
                         opacity: 0
-                    }, 300)
+                    }, 300);
                     $('.login').animate({
                         opacity: 0
                     }, 300, function() {
@@ -346,6 +351,7 @@ app.controller('signup', function($scope, $http, $location) {
 // OUTER DATA
 
 u$er = {
+    username: undefined,
     name: undefined,
     id: undefined,
     profile: undefined,
