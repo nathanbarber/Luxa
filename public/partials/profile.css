@@ -4,6 +4,7 @@
 
 .user {
     opacity: 0;
+    margin-top: 150px;
 }
 
 /* USER NAME AND PROFILE */
@@ -78,9 +79,11 @@
     line-height: 100px;
     color: #565656;
     position: relative;
-    overflow: hidden;
+    overflow: auto;
     display: inline-block;
-    margin: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    vertical-align: top;
 }
 
 .userAction:hover {

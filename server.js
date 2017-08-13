@@ -117,9 +117,8 @@ app.post('/updateUser', function(req, res) {
     "', bio = '" + req.body.bio + 
     "' where username = '" + req.body.username + 
     "'";
-    requests.database(query, function(res) {
-        console.log(res);
-    });
+    requests.database(query);
+    res.end();
 });
 
 // UTILITY

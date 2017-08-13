@@ -9,14 +9,6 @@
     margin-left: auto; margin-right: auto;
 }
 
-.layover {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-}
-
 .button-style-one {
     outline: none;
     margin-top: 20px;

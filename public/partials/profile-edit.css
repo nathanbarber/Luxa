@@ -1,16 +1,33 @@
 #profile-edit {
     display: none;
     z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.blanket {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    background-color: #cfcfcf;
+    opacity: 0.5;
 }
 
 .panel {
+    z-index: 12;
     width: 30vw;
     padding: 40px;
     background-color: lightgrey;
-    display: table-cell;
-    vertical-align: middle;
     border-radius: 10px;
     color: #8f8f8f;
+    margin-top: 20vh;
+    position: relative;
 }
 
 .panel .fieldname{
@@ -24,18 +41,18 @@
 
 .panel input {
     border: none;
-    border-bottom: 3px #6f6f6f solid;
-    background-color: transparent;
+    border-left: 3px #6f6f6f solid;
+    background-color: #dfdfdf;
     font-size: 20px;
     margin-bottom: 40px;
+    padding-left: 10px; 
     color: #6f6f6f;
-    padding-bottom: 5px;
     outline: none;
 }
 
 .panel textarea {
     border: none;
-    background-color: transparent;
+    background-color: #dfdfdf;
     border-left: 3px solid #6f6f6f;
     height: 140px;
     font-size: 20px;

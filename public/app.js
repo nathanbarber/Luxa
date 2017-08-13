@@ -84,12 +84,18 @@ app.controller('profile', function($scope, $location, $http) {
     $scope.renderProfile();
     $scope.showProfileEdit = function() {
         $("#profile-edit").css({
-            display: 'table'
+            display: 'initial'
         });
+        blur('.user');
+        $('.panel input').val(u$er.name);
+        $('.panel textarea').val(u$er.bio);
     };
-});
-
-app.controller('profile-edit', function($scope, $http) {
+    $scope.hideProfileEdit = function() {
+        $('#profile-edit').css({
+            display: "none"
+        });
+        unblur('.user');
+    };
     $scope.submit = function() {
         var updatedValues = {
             username: u$er.username,
@@ -104,14 +110,14 @@ app.controller('profile-edit', function($scope, $http) {
             data: updatedValues,
             method: 'POST',
             success: function(data) {
-                u$er.fullName = updatedValues[1];
-                u$er.bio = updatedValues[2];
-                $('.userhead .name').val(u$er.fullName);
-                $('.userbody .description').val(u$er.bio);
+                u$er.fullName = updatedValues.fullName;
+                u$er.bio = updatedValues.bio;
+                $('.userhead .name').html(u$er.fullName);
+                $('.userbody .description').html(u$er.bio);
                 $('#profile-edit').css({
                     display: "none"
                 });
-                console.log('values updated');
+                unblur('.user');
             }
         });
     };
@@ -138,9 +144,6 @@ app.controller('login', function($scope, $location, $http) {
         if(!signUpRoute) {
             if(!successfulLogin) {
                 $location.path("/login");
-                console.log("blocking");
-            } else {
-                console.log("user logged in");
             }
         }
     });
@@ -350,14 +353,7 @@ app.controller('signup', function($scope, $http, $location) {
 
 // OUTER DATA
 
-u$er = {
-    username: undefined,
-    name: undefined,
-    id: undefined,
-    profile: undefined,
-    bio: undefined,
-    status: undefined
-};
+u$er = {};
 
 successfulLogin = false;
 signUpRoute = false;
@@ -371,6 +367,18 @@ function navHidden() {
 
 function navShown() {
     $('.nav').css('display', 'initial');
+}
+
+function blur(elem) {
+    $(elem).css({
+        filter: 'blur(5px)'
+    });
+}
+
+function unblur(elem) {
+    $(elem).css({
+        filter: 'none'
+    });
 }
 
 function showLoadPanel() {
